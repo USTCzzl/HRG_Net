@@ -31,6 +31,7 @@ def parse_args():
 
     # Dataset & Data & Training
     parser.add_argument('--dataset', type=str,default="cornell", help='Dataset Name ("cornell" or "jacquard")')
+    #change your own path
     parser.add_argument('--dataset-path', type=str,default="/home/zzl/Pictures/cornell" ,help='Path to dataset')
     parser.add_argument('--use-depth', type=int, default=0, help='Use Depth image for training (1/0)')
     parser.add_argument('--use-rgb', type=int, default=1, help='Use RGB image for training (0/1)')
@@ -138,16 +139,12 @@ def train(epoch, net, device, train_data, optimizer, batches_per_epoch, vis=Fals
     index=0
     count=1
     # Use batches per epoch to make training on different sized datasets (cornell/jacquard) more equivalent.
-    # while batch_idx < batches_per_epoch:
     while index < count:
         index=index+1
         batch_idx=0
         for x, y, _, _, _ in train_data:
             # print("shape:",x.shape)
-            batch_idx += 1
-            # if batch_idx >= batches_per_epoch:
-            #     break
-
+            batch_idx += 1    
             xc = x.to(device)
             yc = [yy.to(device) for yy in y]
             lossd = net.compute_loss(xc, yc)
@@ -201,7 +198,6 @@ def run():
     save_folder = os.path.join(args.outdir, net_desc)
     if not os.path.exists(save_folder):
         os.makedirs(save_folder)
-    # tb = tensorboardX.SummaryWriter(os.path.join(args.logdir, net_desc))
 
     # Load Dataset
     logging.info('Loading {} Dataset...'.format(args.dataset.title()))
@@ -231,18 +227,13 @@ def run():
     logging.info('Loading Network...')
     input_channels = 1*args.use_depth + 3*args.use_rgb
     print("channels:",input_channels)
-    # model = get_network(args.network)
 
     from models.parm import config
     from models.HEHERnet_official import HRNet
-    #net = ggcnn(input_channels=input_channels,cfg=config)
     net=HRNet(input_channels=input_channels,cfg=config)
-   # net = torch.load("/home/zzl/Pictures/swin_ggcnn/output/models/220628_0107_/epoch_68_iou_1.0000")
-    # net=model(input_channels=input_channels)
+  
     print("net:",(net))
-    # img = torch.rand(2, 3, 224, 224)
-    # a, b, c, d = net(img)
-    # print(a.shape)
+    
     device = torch.device("cuda:0")
     net = net.to(device)
     optimizer = optim.AdamW(net.parameters(),lr=1e-4)
@@ -253,24 +244,11 @@ def run():
     elif mode=='cosineAnnWarm':
          scheduler = CosineAnnealingWarmRestarts(optimizer,T_0=5,T_mult=1)
     logging.info('Done')
-    # print(net)
-    # Print model architecture.
-    # summary(net, (input_channels, 300, 300))
-    # f = open(os.path.join(save_folder, 'arch.txt'), 'w')
-    # sys.stdout = f
-    # # summary(net, (input_channels, 300, 300))
-    # sys.stdout = sys.__stdout__
-    # f.close()
-    
     best_iou = 0.0
     for epoch in range(args.epochs):
         logging.info('Beginning Epoch {:02d}'.format(epoch))
         train_results = train(epoch, net, device, train_data, optimizer, args.batches_per_epoch, vis=args.vis,scheduler=scheduler)
-        #scheduler.step()
-        # Log training losses to tensorboard
-        # tb.add_scalar('loss/train_loss', train_results['loss'], epoch)
-        # for n, l in train_results['losses'].items():
-        #     tb.add_scalar('train_loss/' + n, l, epoch)
+       
 
         # Run Validation
         logging.info('Validating...')
@@ -278,11 +256,7 @@ def run():
         logging.info('%d/%d = %f' % (test_results['correct'], test_results['correct'] + test_results['failed'],
                                      test_results['correct']/(test_results['correct']+test_results['failed'])))
 
-        # Log validation results to tensorbaord
-        # tb.add_scalar('loss/IOU', test_results['correct'] / (test_results['correct'] + test_results['failed']), epoch)
-        # tb.add_scalar('loss/val_loss', test_results['loss'], epoch)
-        # for n, l in test_results['losses'].items():
-        #     tb.add_scalar('val_loss/' + n, l, epoch)
+        
 
         # Save best performing network
         iou = test_results['correct'] / (test_results['correct'] + test_results['failed'])
