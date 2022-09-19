@@ -47,5 +47,5 @@ For validation and visualization purposes, we provide our [previously trained mo
 
 ### Acknowledgement
 
-Code heavily inspired and modified from https://github.com/dougsm/ggcnn
+Code heavily inspired and modified from https://github.com/dougsm/ggcnn.
 The code for the experiments related to the robot in the physical environment will be released later
