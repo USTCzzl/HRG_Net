@@ -43,3 +43,9 @@ For validation and visualization purposes, we provide our [previously trained mo
     python multi_grasp_visualization.py # For multiobject dataset
 
 <img src="figures/multi_2.png" width="50%">
+
+
+### Acknowledgement
+
+Code heavily inspired and modified from https://github.com/dougsm/ggcnn
+The code for the experiments related to the robot in the physical environment will be released later
