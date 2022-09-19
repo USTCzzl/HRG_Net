@@ -49,7 +49,6 @@ if __name__ == '__main__':
     print(args.network)
     print(args.use_rgb,args.use_depth)
     net = torch.load(args.network)
-    # net_ggcnn = torch.load('./output/models/211112_1458_/epoch_30_iou_0.75')
     device = torch.device("cuda:0")
     Dataset = get_dataset(args.dataset)
 
