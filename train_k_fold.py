@@ -205,9 +205,7 @@ def run():
     
     from models.parm import config
     from models.HEHERnet_official import HRNet
-    # net = ggcnn(input_channels=input_channels,cfg=config)
-    #net=HRNet(input_channels=input_channels,cfg=config)
-    # net=torch.load("/home/zzl/Pictures/swin_ggcnn/output/models/220602_0407_/epoch_11_iou_0.94")
+    
     net=HRNet(input_channels=input_channels,cfg=config)
 
     #net = SwinTransformerSys(in_chans=input_channels,embed_dim=48,num_heads=[1,2,4,8])
@@ -217,14 +215,7 @@ def run():
     listy = [x *30 for x in range(1,1000,3)]
     schedule=torch.optim.lr_scheduler.MultiStepLR(optimizer,milestones=listy,gamma=0.9)
     logging.info('Done')
-    # Print model architecture.
-    #summary(net, (input_channels, 224, 224))
-    #f = open(os.path.join(save_folder, 'arch.txt'), 'w')
-    #sys.stdout = f
-    #summary(net, (input_channels, 224, 224))
-    #sys.stdout = sys.__stdout__
-    #f.close()
-
+    
     best_iou = 0.0
     for epoch in range(args.epochs):
         accuracy=0.
