@@ -13,6 +13,16 @@ This repository contains the implementation of the High Resolution Grasp Nerual 
 
 Any questions or comments contact [mail](zzl1215@mail.ustc.edu.cn).
 
+If you use this work, please cite:
+
+    @article{zhou2022robotic,
+    title={A Robotic Visual Grasping Design: Rethinking Convolution Neural Network with High-Resolutions},
+    author={Zhou, Zhangli and Wang, Shaochen and Chen, Ziyang and Cai, Mingyu and Kan, Zhen},
+    journal={arXiv preprint arXiv:2209.07459},
+     year={2022}
+    }
+
+
 ### Installation
 
     conda create -n hrgnet python==3.8
