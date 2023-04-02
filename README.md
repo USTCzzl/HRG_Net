@@ -41,7 +41,7 @@ If you use this work, please cite:
     python train_hrgnet.py
 
 ### Evaluation/Visualisation
-For validation and visualization purposes, we provide our [previously trained model](https://drive.google.com/drive/folders/1LdLR9_wZKIduYQ8GT5qFsTOjihfjRRmV)
+For validation and visualization purposes, we provide our [previously trained model](https://drive.google.com/file/d/11kEiUqwESJnHVks9JoAa7OAqYDOe4Kuo/view?usp=sharing, https://drive.google.com/file/d/18iPLWWMAf8162co6Jl-dbV_QabiiTWCD/view?usp=sharing, https://drive.google.com/file/d/19Dvd2UuyqvUGO7R_Ea-xlLH2pfC-wBoH/view?usp=sharing, https://drive.google.com/file/d/1IbpaDu3tylZvhnhetjVGX-GZVrWTUd_K/view?usp=sharing, https://drive.google.com/file/d/1NRcnof2iGFlqnmSOQN2xfXKt84ZLDwGI/view?usp=sharing, https://drive.google.com/file/d/1tIh5uKciGedYaE0bVM2zN29IfSkaU1p5/view?usp=sharing)
 
     python evaluation_grasp.py    # For Cornell and Jacquard dataset
 
